@@ -4,7 +4,7 @@ namespace Application.Security.Concurrency;
 
 public class DummyConcurrencyManager : IDummyConcurrencyManager
 {
-    private readonly HashSet<string> _attemptsToRegister;
+    private readonly HashSet<string> _attemptsToRegister = new();
 
     public void RegistrationKnocking(string login) => _attemptsToRegister.Add(login);
     

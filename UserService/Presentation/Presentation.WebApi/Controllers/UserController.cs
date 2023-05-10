@@ -4,6 +4,7 @@ using Application.Dto.Users;
 using Domain.Users;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebApi.Models.Users;
@@ -32,7 +33,16 @@ public class UserController : ControllerBase
         [FromBody] CreateUserModel model,
         [FromServices] IValidator<CreateUser.Command> validator)
     {
+        if (_concurrencyManager.IsRacingSituationNow(model.Login))
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, "User with the same login is registering now");
+        }
+        
         var command = new CreateUser.Command(model.Login, model.Password, model.UserGroupId);
+        
+        _concurrencyManager.RegistrationKnocking(model.Login);
+
+        var delay = Task.Delay(5000, CancellationToken);
         
         var validationResult = await validator.ValidateAsync(command, CancellationToken);
         if (!validationResult.IsValid)
@@ -41,6 +51,10 @@ public class UserController : ControllerBase
         }
         
         var response = await _mediator.Send(command, CancellationToken);
+
+        await delay.WaitAsync(CancellationToken);
+        _concurrencyManager.RemoveValue(model.Login);
+        
         return Ok(response.User);
     }
     
