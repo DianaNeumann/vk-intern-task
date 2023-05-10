@@ -3,6 +3,7 @@ using Application.Contracts.User;
 using Application.Dto.Users;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebApi.Models.Users;
@@ -62,6 +63,7 @@ public class UserController : ControllerBase
         return Ok(response.Token);
     }
 
+    [Authorize]
     [HttpDelete("{id:int}")]
     public async Task<ActionResult<string>> DeleteUserAsync(
         int id,
@@ -78,6 +80,7 @@ public class UserController : ControllerBase
         return Ok(response.User);
     }
 
+    [Authorize]
     [HttpGet("get/{id:int}")]
     public async Task<ActionResult<UserDto>> GetUserAsync(
         int id,
@@ -94,6 +97,7 @@ public class UserController : ControllerBase
         return Ok(response.User);
     }
 
+    [Authorize]
     [HttpGet("get/all/{cursor:int}/{pageSize:int}/")]
     public async Task<ActionResult<string>> GetAllUsersAsync(int cursor, int pageSize)
     {
