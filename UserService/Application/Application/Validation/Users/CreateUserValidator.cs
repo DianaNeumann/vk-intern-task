@@ -10,16 +10,9 @@ namespace Application.Validation.Users;
 
 public class CreateUserValidator  : AbstractValidator<CreateUser.Command>
 {
-    private readonly IDatabaseContext _context;
-    private readonly IDummyConcurrencyManager _concurrencyManager;
-    
-    private CancellationToken cancellationToken => CancellationToken.None;
-    
-    public CreateUserValidator(IDatabaseContext context, IDummyConcurrencyManager concurrencyManager)
+    public CreateUserValidator(IDatabaseContext context)
     {
-        _context = context;
-        _concurrencyManager = concurrencyManager;
-        
+
         RuleFor(x => x.Login)
             .NotEmpty()
             .WithMessage("Empty name");

@@ -22,6 +22,8 @@ public static class ServiceCollectionExtensions
         collection.AddScoped<ITokenManager, JwtTokenManager>();
         collection.AddSingleton<IDummyConcurrencyManager, DummyConcurrencyManager>();
         collection.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
+        collection.AddValidatorsFromAssemblyContaining<GetUserByIdValidator>();
+        collection.AddValidatorsFromAssemblyContaining<DeleteUserValidator>();
         return collection;
     }
 }
