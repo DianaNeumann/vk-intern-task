@@ -27,8 +27,14 @@
 
 
     <ItemGroup>
-      <Folder Include="Security" />
       <Folder Include="Services" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
+        <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.AspNetCore.App\6.0.6\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

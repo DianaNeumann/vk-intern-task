@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Domain.UserGroups;
 using Domain.UserStates;
+using Domain.UserStates.Tools;
 
 namespace Domain.Users;
 

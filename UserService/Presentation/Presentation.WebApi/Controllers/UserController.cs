@@ -1,6 +1,10 @@
+using Application.Abstractions.Security;
 using Application.Contracts.User;
 using Application.Dto.Users;
+using Domain.Users;
+using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebApi.Models.Users;
 using static Application.Contracts.User.CreateUser;
@@ -13,30 +17,70 @@ namespace Presentation.WebApi.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IDummyConcurrencyManager _concurrencyManager;
 
-    public UserController(IMediator mediator)
+    public UserController(IMediator mediator, IDummyConcurrencyManager concurrencyManager)
     {
         _mediator = mediator;
+        _concurrencyManager = concurrencyManager;
     }
     
     public CancellationToken CancellationToken => HttpContext.RequestAborted;
 
-    [HttpPost("Register")]
-    public async Task<ActionResult<UserDto>> CreateUserAsync([FromBody] CreateUserModel model)
+    [HttpPost("register")]
+    public async Task<ActionResult<UserDto>> CreateUserAsync(
+        [FromBody] CreateUserModel model,
+        [FromServices] IValidator<CreateUser.Command> validator)
     {
         var command = new CreateUser.Command(model.Login, model.Password, model.UserGroupId);
+        
+        var validationResult = await validator.ValidateAsync(command, CancellationToken);
+        if (!validationResult.IsValid)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, validationResult.Errors.Select(x => x.ErrorMessage));
+        }
+        
         var response = await _mediator.Send(command, CancellationToken);
         return Ok(response.User);
     }
     
     
-    [HttpPost("Login")]
+    [HttpPost("login")]
     public async Task<ActionResult<string>> LoginUserAsync([FromBody] LoginUserModel model)
     {
         var command = new LoginUser.Command(model.Login, model.Password);
         var response = await _mediator.Send(command, CancellationToken);
         return Ok(response.Token);
     }
+    
+    
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult<string>> DeleteUserAsync(int id)
+    {
+        var command = new DeleteUser.Command(id);
+        var response = await _mediator.Send(command, CancellationToken);
+        return Ok(response.User);
+    }
+    
+    [HttpGet("get/{id:int}")]
+    public async Task<ActionResult<UserDto>> GetUserAsync(int id)
+    {
+        var command = new GetUserById.Query(id);
+        var response = await _mediator.Send(command, CancellationToken);
+        return Ok(response.User);
+    }
+    
+    [HttpGet("get/all/{cursor:int}/{pageSize:int}/")]
+    public async Task<ActionResult<string>> GetAllUsersAsync(int cursor, int pageSize)
+    {
+        var command = new GetAllUsersCursor.Query(cursor, pageSize);
+        var response = await _mediator.Send(command, CancellationToken);
+        return Ok(response.CursorResponse);
+    }
+    
+    
+    
+    
     
     
 }

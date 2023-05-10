@@ -1,8 +1,11 @@
 using Application.Abstractions.Security;
 using Application.Abstractions.Services;
+using Application.Security.Concurrency;
 using Application.Security.Passwords;
 using Application.Security.Tokens;
 using Application.Services;
+using Application.Validation.Users;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using MPS.Domain.Modules.SecurityModules.PasswordModule.Interfaces;
@@ -17,7 +20,8 @@ public static class ServiceCollectionExtensions
         collection.AddScoped<IAuthService, AuthService>();
         collection.AddScoped<IPasswordManager, Sha256PasswordManager>();
         collection.AddScoped<ITokenManager, JwtTokenManager>();
-
+        collection.AddSingleton<IDummyConcurrencyManager, DummyConcurrencyManager>();
+        collection.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
         return collection;
     }
 }

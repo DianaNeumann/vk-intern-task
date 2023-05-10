@@ -9,5 +9,5 @@ public record UserDto(
         string PasswordHash,
         DateTime CreatedDate,
         UserGroup UserGroup,
-        UserState SserState
+        UserState UserState
         );
