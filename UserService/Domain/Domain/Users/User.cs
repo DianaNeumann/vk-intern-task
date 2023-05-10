@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Domain.UserGroups;
 using Domain.UserStates;
 
@@ -9,7 +10,10 @@ public class User
     public string Login { get; set; }
     public string PasswordHash { get; set; }
     public DateTime CreatedDate { get; set; }
+    
+    [ForeignKey("User.UserGroup")]
     public virtual UserGroup UserGroup { get; set; }
+    [ForeignKey("User.UserState")]
     public virtual UserState UserState { get; set; }
     
     
@@ -18,11 +22,11 @@ public class User
         
     }
     
-    public User(string login, string passwordHash, DateTime createdDate, UserGroup userGroup, UserState userState)
+    public User(string login, string passwordHash, UserGroup userGroup, UserState userState)
     {
         Login = login;
         PasswordHash = passwordHash;
-        CreatedDate = createdDate;
+        CreatedDate = DateTime.Now.ToUniversalTime();;
         UserGroup = userGroup;
         UserState = userState;
     }

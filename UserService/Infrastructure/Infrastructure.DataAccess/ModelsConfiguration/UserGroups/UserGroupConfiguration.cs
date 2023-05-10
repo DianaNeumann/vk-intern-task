@@ -1,4 +1,5 @@
 using Domain.UserGroups;
+using Domain.UserGroups.Tools;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,6 +9,8 @@ public class UserGroupConfiguration : IEntityTypeConfiguration<UserGroup>
 {
     public void Configure(EntityTypeBuilder<UserGroup> builder)
     {
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+        builder.HasData(new UserGroup(1033, UserGroupCode.User, "No privileges role"));
+        
+        builder.HasData(new UserGroup(3301, UserGroupCode.Admin, "Privileges role"));
     }
 }

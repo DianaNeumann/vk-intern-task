@@ -2,6 +2,6 @@ namespace Domain.UserGroups.Tools;
 
 public enum UserGroupCode
 {
-    Admin,
-    User,
+    User = 0,
+    Admin = 1,
 }

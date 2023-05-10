@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DataAccess;
 
-internal class DatabaseContext : DbContext, IDatabaseContext
+public class DatabaseContext : DbContext, IDatabaseContext
 {
     private IDatabaseContext _databaseContextImplementation;
 

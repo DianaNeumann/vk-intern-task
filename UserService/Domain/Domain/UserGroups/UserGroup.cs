@@ -13,8 +13,9 @@ public class UserGroup
         
     }
     
-    public UserGroup(UserGroupCode code, string description)
+    public UserGroup(int id, UserGroupCode code, string description)
     {
+        Id = id;
         Code = code;
         Description = description;
     }

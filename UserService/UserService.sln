@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Contracts", "Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Dto", "Application\Application.Dto\Application.Dto.csproj", "{62FF9E95-C6D8-421B-A57F-133DAF24F2C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.WebApi", "Presentation\Presentation.WebApi\Presentation.WebApi.csproj", "{7A331138-76C1-4413-9E30-157821674564}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Security", "Application\Application.Security\Application.Security.csproj", "{E5D84D20-14C2-424A-976D-60715BEEA4DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +36,8 @@ Global
 		{0C174389-3357-47A9-9DFF-2D2042E06D26} = {2600FE75-F82D-4ACC-B551-FFB8CA987798}
 		{1425FDEB-18E8-408F-B5E1-A74637BB9479} = {2600FE75-F82D-4ACC-B551-FFB8CA987798}
 		{62FF9E95-C6D8-421B-A57F-133DAF24F2C7} = {2600FE75-F82D-4ACC-B551-FFB8CA987798}
+		{7A331138-76C1-4413-9E30-157821674564} = {DCD5A2A0-62E9-4393-91E6-FD48A14D43FE}
+		{E5D84D20-14C2-424A-976D-60715BEEA4DC} = {2600FE75-F82D-4ACC-B551-FFB8CA987798}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C47DC2D5-F764-4378-81C2-884C160C4DA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -58,5 +64,13 @@ Global
 		{62FF9E95-C6D8-421B-A57F-133DAF24F2C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62FF9E95-C6D8-421B-A57F-133DAF24F2C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62FF9E95-C6D8-421B-A57F-133DAF24F2C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A331138-76C1-4413-9E30-157821674564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A331138-76C1-4413-9E30-157821674564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A331138-76C1-4413-9E30-157821674564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A331138-76C1-4413-9E30-157821674564}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5D84D20-14C2-424A-976D-60715BEEA4DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5D84D20-14C2-424A-976D-60715BEEA4DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5D84D20-14C2-424A-976D-60715BEEA4DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5D84D20-14C2-424A-976D-60715BEEA4DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -13,8 +13,9 @@ public class UserState
         
     }
  
-    public UserState(UserStateCode code, string description)
+    public UserState(int id, UserStateCode code, string description)
     {
+        Id = id;
         Code = code;
         Description = description;
     }

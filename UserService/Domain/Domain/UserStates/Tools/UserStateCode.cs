@@ -2,6 +2,6 @@ namespace Domain.UserStates.Tools;
 
 public enum UserStateCode
 {
-    Active,
-    Blocked
+    Blocked = 0,
+    Active = 1
 }
